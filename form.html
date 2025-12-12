@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>form validate</title>
+</head>
+<body>
+<h1>REG FORM</h1>
+<form name="regform" onsubmit="formvalidation()">
+
+<label for="name">NAME</label>
+<input type="text" id="name" name="nm"><br><br>
+
+<label for="user">USER</label>
+<input type="text" id="user" name="unm"><br><br>
+
+<label for="pass">PASSWORD</label>
+<input type="password" id="pass" name="passwrd"><br><br>
+
+<label for="repass">REPASSWORD</label>
+<input type="password" id="repass" name="repasswrd"><br><br>
+
+<label for="no">NUMBER</label>
+<input type="text" id="no" name="num"><br><br>
+
+<label for="mail">E MAIL</label>
+<input type="text" id="mail" name="email"><br><br>
+
+<h6>Department</h6>
+<select id="dept" name="depart">
+<option value=""></option>
+<option value="deptmech">MECH</option>
+<option value="civil">CIVIL</option>
+<option value="aei">AEI</option>
+<option value="ec">EC</option>
+</select><br><br>
+
+<h6>Gender</h6>
+<input type="radio" id="male" name="gender">
+<label for="male">MALE</label>
+<input type="radio" id="female" name="gender">
+<label for="female">FEMALE</label>
+<input type="radio" id="other" name="gender">
+<label for="other">OTHER</label><br><br>
+
+<input type="submit" value="SUBMIT">
+</form>
+<script>
+
+function formvalidation(){
+
+var name=document.regform.nm.value;
+var username=document.regform.unm.value;
+var password=document.regform.passwrd.value;
+var repassword=document.regform.repasswrd.nm.value;
+var number=document.regform.num.value;
+var email=document.regform.email.value;
+var department=document.regform.depart.value;
+var gender=document.regform.gender.value;
+const specialChars="!@#$%^&*()+]{?";
+
+var flag=0;
+if(name==="" || name===null) {
+alert("enter name"); 
+}else {
+for(const char of name) {
+if(!(char >="a" && char <= "z")&& !(char >="A" && char <= "Z")) {
+flag=1;
+break;
+}
+}
+if(flag==1)
+alert("only enter alphabets"); 
+}
+var flag1=false, flag2=false, flag3=false;
+
+if(username==="" || username===null) {
+alert("please enter username");
+}
+
+if(password.length <6) {
+alert("aleast 6 chars required");
+}else {
+
+for(const char of password) {
+
+if(char >="A" && char <= "Z")
+flag1=true;
+else if(char >="0" && char <= "9")
+flag2=true;
+else if(specialChars.includes(char))
+flag3=true;
+}
+
+if(!flag1==false || !flag2==false ||!flag3==false){
+alert("must contain upper chars,numbers,special chars.");
+}
+}
+
+(if repassword !== password) {
+alert(both should be same);
+}
+
+if(isNaN(number)){
+alert("must be a no");
+}else if(number.length <10){
+alert("number must be 10");
+}
+}
+
+var atposition=email.indexOf("@");
+var dotposition=email.lastIndexOf(".");
+if(atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length) {
+alert("please enter valid mail");
+}
+var list=document.regform.department.value;
+if(list==""){
+   alert("Please select a department!");
+}
+
+if((document.regform.gender[0].checked==false) && (document.regform.gender[1].checked==false)){
+   alert("Please specify gender!");
+}
+
+alert("Form submitted successfully!");
+   
+}
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
