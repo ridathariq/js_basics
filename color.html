@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>colorchange</title>
+</head>
+<body>
+<h1>change color on button click</h1>
+<button type="button" value="colorchange" onclick="colorchange()">CLICK HERE</button>
+
+<script>
+function colorchange(){
+
+
+var x=Math.trunc(Math.random()*255);
+var y=Math.trunc(Math.random()*255);
+var z=Math.trunc(Math.random()*255);
+document.body.style.backgroundColor="rgb("+x+","+y+","+z+")";
+}
+
+</script>
+</body>
+</html>
+
+ 
