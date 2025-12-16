@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration form</title>
+<style>
+body{background-color:#d0e7f9; margin:0; padding:0; display:flex; justify-content:center; align-items:center; height:100vh;}
+.container{background-color:white; padding:20px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); width:300px;}
+h2{text-align:center; margin-bottom:20px;}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h2>REGISTRATION FORM</h2>
+
+<form name="regform"  onsubmit="validateform()">
+<div class="form-group">
+
+<label for="nm">Your name:</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="text" id="nm" name="name" ><br/><br/><br/>
+
+<label for="unm">Username:</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="text" id="unm" name="uname" ><br/><br/><br/>
+
+<label for="pwd">Password:</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="password" id="pwd" name="passwd" ><br/><br/><br/>
+
+<label for="repwd">Re-Password:</label>
+<input type="password" id="repwd" name="repasswd" ><br/><br/><br/>
+
+<label for="phno">Phone No:</label>&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="text" id="phno" name="phoneno" ><br/><br/><br/>
+
+<label for="email">Email:</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="text" id="email" name="emailid" ><br/><br/><br/>
+
+Department:&nbsp&nbsp<select name="department">
+<option value=""></option>
+<option>CSD</option>
+<option>CE</option>
+<option>ME</option>
+<option>AEI</option>
+<option>CHE</option>
+</select><br><br><br>
+
+Gender:&nbsp&nbsp&nbsp&nbsp<input type="radio" id="genderm" name="gender" value="male">
+<label for="gender">male</label><br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="radio" id="gender" name="genderf" value="female">
+<label for="gender">female</label><br><br><br>
+
+<input type="submit" value="REGISTER">
+
+</form>
+</div>
+<script>
+
+function validateform()
+{
+var name=document.getElementById("nm").value;
+var username=document.regform.uname.value;
+var password=document.regform.passwd.value;
+var repassword=document.regform.repasswd.value;
+
+var phoneno=document.regform.phoneno.value;
+var emailid=document.regform.emailid.value;
+var radio=document.regform.gender.value;
+var department=document.regform.department.value;
+
+const string="!@#$%^&*()-+./";
+
+var flag=0;
+
+
+
+if(name==null || name=="")
+   {
+   alert("NAME CANNOT BE NULL");
+   }
+else{
+   for(const char of name)
+{
+   if(!(char>="a" && char<="z") && !(char>="A" && char<="Z"))
+{
+       flag=1;
+break;
+  }}
+if(flag==1)
+alert("invalid name");
+}
+
+
+
+if(username==null || username==""){
+   alert("USERNAME CANNOT BE NULL");
+   }
+
+var capitalflag=0;
+var numberflag=0;
+var specialflag=0;
+var otherflag=0;
+
+if(password.length<6){
+   alert("Password must be atleast 6 characters long");
+   }else{
+      for(const char of password)
+{
+      if(char >="A" && char<="Z"){
+       capitalflag=1;
+       }
+      else if(char>="0" && char<="9"){
+        numberflag=1;
+       }
+      else if(string.includes(char)){
+        specialflag=1;
+       }
+      else{
+      otherflag=1;
+  }
+}if(capitalflag==0 || numberflag==0|| specialflag==0){
+   alert("password should contain atleast 1 capital letter, 1 digit and a special character");
+   }}
+
+if(repassword!=password){
+   alert("Both passwords should be the same!");
+   }
+
+if(isNaN(phoneno)){
+    alert("Enter a numeric value on the phone number field!");
+    }else{
+    if(phoneno.length!=10){
+     alert("Enter 10 numbers!");
+     }
+    }
+
+
+var atposition=emailid.indexOf("@");
+var dotposition=emailid.lastIndexOf(".");
+
+if(atposition<1 || dotposition<atposition+2 || dotposition+2>=emailid.length){
+    alert("Please enter a valid email address!");
+}
+
+var list=document.regform.department.value;
+if(list==""){
+   alert("Please select a department!");
+}
+
+if((document.regform.gender[0].checked==false) && (document.regform.gender[1].checked==false)){
+   alert("Please specify gender!");
+}
+}
+</script>
+
+</body>
+</html>
