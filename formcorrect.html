@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+</head>
+<body>
+<h1>REG FORM</h1>
+<form name="regform" onsubmit="return formvalidation();">
+
+    <label for="name">NAME</label>
+    <input type="text" id="name" name="nm"><br><br>
+
+    <label for="user">USER</label>
+    <input type="text" id="user" name="unm"><br><br>
+
+    <label for="pass">PASSWORD</label>
+    <input type="password" id="pass" name="passwrd"><br><br>
+
+    <label for="repass">REPASSWORD</label>
+    <input type="password" id="repass" name="repasswrd"><br><br>
+
+    <label for="no">NUMBER</label>
+    <input type="text" id="no" name="num"><br><br>
+
+    <label for="mail">E MAIL</label>
+    <input type="text" id="mail" name="email"><br><br>
+
+    <h6>Department</h6>
+    <select id="dept" name="depart">
+        <option value="">Select Department</option>
+        <option value="deptmech">MECH</option>
+        <option value="civil">CIVIL</option>
+        <option value="aei">AEI</option>
+        <option value="ec">EC</option>
+    </select><br><br>
+
+    <h6>Gender</h6>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">MALE</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">FEMALE</label>
+    <input type="radio" id="other" name="gender" value="other">
+    <label for="other">OTHER</label><br><br>
+
+    <input type="submit" value="SUBMIT">
+</form>
+
+<script>
+function formvalidation() {
+    var name = document.regform.nm.value.trim();
+    var username = document.regform.unm.value.trim();
+    var password = document.regform.passwrd.value;
+    var repassword = document.regform.repasswrd.value;
+    var number = document.regform.num.value.trim();
+    var email = document.regform.email.value.trim();
+    var department = document.regform.depart.value;
+    var gender = document.regform.gender.value;
+
+    const specialChars = "!@#$%^&*()+]{?}";
+    var flag = 0;
+
+    // Name validation
+    if (name === "") {
+        alert("Enter name");
+        return false;
+    }
+    for (const char of name) {
+        if (!((char >= "a" && char <= "z") || (char >= "A" && char <= "Z"))) {
+            flag = 1;
+            break;
+        }
+    }
+    if (flag === 1) {
+        alert("Only enter alphabets in name");
+        return false;
+    }
+
+    // Username validation
+    if (username === "") {
+        alert("Please enter username");
+        return false;
+    }
+
+    // Password validation
+    if (password.length < 6) {
+        alert("Password must contain at least 6 characters");
+        return false;
+    }
+    var flag1 = false, flag2 = false, flag3 = false;
+    for (const char of password) {
+        if (char >= "A" && char <= "Z") flag1 = true;
+        else if (char >= "0" && char <= "9") flag2 = true;
+        else if (specialChars.includes(char)) flag3 = true;
+    }
+    if (!flag1 || !flag2 || !flag3) {
+        alert("Password must contain uppercase letters, numbers, and special characters.");
+        return false;
+    }
+
+    // Repassword validation
+    if (repassword !== password) {
+        alert("Passwords do not match");
+        return false;
+    }
+
+    // Number validation
+    if (isNaN(number)) {
+        alert("Number must be numeric");
+        return false;
+    }
+    if (number.length !== 10) {
+        alert("Number must be 10 digits");
+        return false;
+    }
+
+    // Email validation
+    var atposition = email.indexOf("@");
+    var dotposition = email.lastIndexOf(".");
+    if (atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length) {
+        alert("Please enter a valid email");
+        return false;
+    }
+
+    // Department validation
+    if (department === "") {
+        alert("Please select a department!");
+        return false;
+    }
+
+    // Gender validation
+    if (!document.querySelector('input[name="gender"]:checked')) {
+        alert("Please specify gender!");
+        return false;
+    }
+
+    alert("Form submitted successfully!");
+    return true;
+}
+</script>
+</body>
+</html>
